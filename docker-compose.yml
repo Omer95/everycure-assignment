@@ -20,6 +20,9 @@ services:
       - 5000:5000
     links:
       - db
+    volumes:
+      - ./data:/entity-extraction/data
 
 volumes:
   postgres-data:
+  

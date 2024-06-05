@@ -1,4 +1,5 @@
 import yaml
+import os
 
 with open('config.yml', 'r') as config_file:
     config = yaml.safe_load(config_file)
@@ -19,3 +20,10 @@ def prepare_response(entities, text):
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() == 'pdf'
+
+def write_results_to_disk(filename, results):
+    if not os.path.exists('data'):
+        print('creating data directory')
+        os.mkdir('data')
+    with open('/entity-extraction/data/{}'.format(filename), 'w') as writefile:
+        writefile.write(str(results))

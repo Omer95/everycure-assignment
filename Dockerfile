@@ -9,4 +9,4 @@ COPY . .
 RUN pip install -r requirements.txt
 
 # CMD ["flask", "--app", "test", "run"]
-CMD ["python", "routes.py"]
+CMD ["python", "/entity-extraction/src/routes.py"]
