@@ -1,4 +1,6 @@
 flask
 pdfminer.six
 transformers
-tqdm
+pyyaml
+psycopg2-binary
+torch
