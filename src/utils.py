@@ -1,5 +1,6 @@
 import yaml
 import os
+import logging
 
 with open('config.yml', 'r') as config_file:
     config = yaml.safe_load(config_file)
@@ -23,7 +24,7 @@ def allowed_file(filename):
 
 def write_results_to_disk(filename, results):
     if not os.path.exists('data'):
-        print('creating data directory')
+        logging.info('creating data directory')
         os.mkdir('data')
     with open('/entity-extraction/data/{}'.format(filename), 'w') as writefile:
         writefile.write(str(results))

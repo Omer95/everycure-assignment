@@ -1,6 +1,7 @@
 import psycopg2
 from utils import config
 from datetime import datetime
+import logging
 
 def connect():
     try:
@@ -10,10 +11,10 @@ def connect():
             user = config['DATABASE']['USER'],
             password = config['DATABASE']['PASSWORD']
         ) as conn:
-            print('Connected to PostgreSQL server')
+            logging.info('Connected to PostgreSQL server')
             return conn
     except(psycopg2.DatabaseError, Exception) as error:
-        print(error)
+        logging.error(error)
 
 def write_results_to_database(filename, results_dir):
     conn = connect()
@@ -23,10 +24,12 @@ def write_results_to_database(filename, results_dir):
         cursor.execute("""INSERT INTO inference (filename, model, start_at, results_file) VALUES (%s, %s, %s, %s)""",
                        (filename, config['INFERENCE_MODEL'], timestamp, results_dir))
         conn.commit()
+        logging.info('Insert operation successful')
     except psycopg2.Error:
         conn.rollback()
-        print('error inserting into inference table')
+        logging.error('error inserting into inference table')
     finally:
+        logging.info('Closing database connection')
         cursor.close()
         conn.close()
 

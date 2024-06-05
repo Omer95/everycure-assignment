@@ -2,11 +2,16 @@
 SERVER:
   HOST: 0.0.0.0
   PORT: 5000
+
 DATABASE:
   HOST: db
   DB: postgres
   USER: postgres
   PASSWORD: postgres
+
 INFERENCE_MODEL: d4data/biomedical-ner-all
+
 CONTEXT_STRIDE: 70
+
+LOGFILE: /entity-extraction/data/app.log
 ...
